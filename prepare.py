@@ -38,10 +38,11 @@ def load_line(line, cti, wti, tti):
         if y not in tti:
             tti[y] = len(tti)
         y = [str(tti[y])]
-    for w in line.split(" "):
+    for w in line.strip().split(" "):
         w, tag = (w, None) if HRE else re.split("/(?=[^/]+$)", w)
         w0 = normalize(w) # for character embedding
         w1 = w0.lower() # for word embedding
+        tag = tag.strip()
         if not KEEP_IDX:
             for c in w0:
                 if c not in cti:
